@@ -1,3 +1,4 @@
+const { ipcRenderer } = require('electron');
 
 function makeReviewForm(obj) {
 
@@ -24,7 +25,7 @@ function makeReviewForm(obj) {
                     <input type="button" class="review-btn" value="تم"  />
                 </div>
 
-                <input type="hidden" name="obj" class="hidden" value='${JSON.stringify(obj)}' />
+                <input type="hidden" name="obj" class="hidden" value='${obj}' />
 
             </form>
     </div>
@@ -121,16 +122,16 @@ class Trip {
     startCity;
     endCity;
     time;
-    deliveryGay;
+    deliveryGuy;
     color;
+    date;
 
     // constants 
-
 
     timeFactor = 0.05;
 
 
-    constructor({ svg, startPoint, endPoint, startCity, endCity, color, time, deliveryGay }) {
+    constructor({ svg, startPoint, endPoint, startCity, endCity, color, time, deliveryGuy }) {
         this.svg = svg;
         this.startPoint = startPoint;
         this.endPoint = endPoint;
@@ -138,7 +139,8 @@ class Trip {
         this.endCity = endCity;
         this.color = color;
         this.time = time;
-        this.deliveryGay = deliveryGay;
+        this.deliveryGuy = deliveryGuy;
+        this.date = new Date();
 
     }
 
@@ -379,7 +381,6 @@ class Trip {
     }
 
     clear() {
-
         this.timeLine.kill();
 
         $([this.startPointRef, this.endPointRef,
@@ -554,15 +555,20 @@ class Trip {
     }
 
 
+    toJSON() {
 
+        return {
+            startPoint: this.startPoint,
+            endPoint: this.endPoint,
+            time: this.time,
+            deliveryGuy: this.deliveryGuy,
+            date: this.date
 
+        };
+    }
     onComplete() {
 
-        delete this.timeLine;
-        delete this.svg;
-
-        makeReviewForm(this);
-
+        makeReviewForm(JSON.stringify(this));
     }
 
 }
@@ -585,12 +591,12 @@ $(function () {
     function createTrip() {
 
         let color = $("#color").val().toString();
-        let deliveryGay = $("#delivery-gay").val();
+        let deliveryGuy = $("#delivery-guy").val();
 
         let time = parseInt($("#animation-time-second").val());
         time += parseInt($("#animation-time-minute").val()) * 60;
         time += parseInt($("#animation-time-hour").val()) * 60 * 60;
-        let trip = new Trip({ svg: context, startPoint: point1, endPoint: point2, startCity: city1, endCity: city2, color, deliveryGay, time });
+        let trip = new Trip({ svg: context, startPoint: point1, endPoint: point2, startCity: city1, endCity: city2, color, deliveryGuy, time });
 
         trip.start();
 
@@ -648,8 +654,21 @@ $(function () {
 
         let form = $(popup).find('form')[0];
 
-        let toDownload = $(form).serializeArray();
+        let formData = $(form).serializeArray();
+
+        let toDownload = {};
+
+        for (let obj of formData) {
+
+            if (obj.name == 'obj') {
+                toDownload = { ...toDownload, ...JSON.parse(obj.value) };
+            } else {
+                toDownload[obj.name] = obj.value;
+            }
+        }
+
         console.log(toDownload);
+        ipcRenderer.send('save-data', toDownload);
 
         $(popup).remove();
 

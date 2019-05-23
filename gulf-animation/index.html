@@ -6,14 +6,14 @@
 	<style>
 		@font-face {
 			font-family: "Arimo";
-			src: url("/fonts/Arimo/Arimo-Regular.ttf") format('truetype');
+			src: url("./fonts/Arimo/Arimo-Regular.ttf") format('truetype');
 			font-weight: 400;
 			font-style: normal;
 		}
 
 		@font-face {
 			font-family: "Arimo";
-			src: url("/fonts/Arimo/Arimo-Bold.ttf") format('truetype');
+			src: url("./fonts/Arimo/Arimo-Bold.ttf") format('truetype');
 			font-weight: 700;
 			font-style: bold;
 		}
@@ -21,7 +21,7 @@
 
 		@font-face {
 			font-family: "Cairo";
-			src: url("/fonts/Cairo/Cairo-Regular.ttf") format('truetype');
+			src: url("./fonts/Cairo/Cairo-Regular.ttf") format('truetype');
 			font-weight: 400;
 			font-style: normal;
 		}
@@ -29,7 +29,7 @@
 
 		@font-face {
 			font-family: "Cairo";
-			src: url("/fonts/Cairo/Cairo-Bold.ttf") format('truetype');
+			src: url("./fonts/Cairo/Cairo-Bold.ttf") format('truetype');
 			font-weight: 700;
 			font-style: bold;
 		}
@@ -256,6 +256,10 @@
 		input[type=button] {
 			font-size: 1.1rem;
 		}
+		.in-delivery{
+			height: calc(94vh - 100px);
+			overflow-y:auto;
+		}
 	</style>
 </head>
 
@@ -267,7 +271,7 @@
 			<form>
 				<div class="input-wrapper">
 					<label>الموصلاتي</label>
-					<input type="text" role="name" id="delivery-gay" dir="rtl" placeholder="مثال : أحمد المصري" />
+					<input type="text" role="name" id="delivery-guy" dir="rtl" placeholder="مثال : أحمد المصري" />
 
 				</div>
 				<div class="input-wrapper ">
@@ -435,7 +439,7 @@
 					<div class="time-left">
 						<h5 class="label">الوقت المتبقي</h5>
 						<h1 class="timer">
-							03 : 23
+							03 : 23 : 00
 						</h1>
 					</div>
 					<div class="trip-info">

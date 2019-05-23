@@ -1,0 +1,29 @@
+@font-face {
+    font-family: "Arimo";
+    src: url("./fonts/Arimo/Arimo-Regular.ttf") format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Arimo";
+    src: url("./fonts/Arimo/Arimo-Bold.ttf") format('truetype');
+    font-weight: 700;
+    font-style: bold;
+}
+
+
+@font-face {
+    font-family: "Cairo";
+    src: url("./fonts/Cairo/Cairo-Regular.ttf") format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+
+@font-face {
+    font-family: "Cairo";
+    src: url("./fonts/Cairo/Cairo-Bold.ttf") format('truetype');
+    font-weight: 700;
+    font-style: bold;
+}

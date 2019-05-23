@@ -1,11 +1,11 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const { app, BrowserWindow } = require('electron')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
-function createWindow () {
+function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 800,
@@ -16,7 +16,7 @@ function createWindow () {
   })
 
   // and load the index.html of the app.
-  mainWindow.loadFile('index.html')
+  mainWindow.loadFile('gulf-animation/index.html')
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
@@ -50,3 +50,22 @@ app.on('activate', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+
+
+const { ipcMain } = require('electron');
+let fs = require('fs');
+const uuidv4 = require('uuid/v4'); // I chose v4 ‒ you can select others
+
+// Attach listener in the main process with the given ID
+ipcMain.on('save-data', (event, obj) => {
+
+  if (!fs.existsSync('data')) {
+    fs.mkdirSync('data');
+  }
+
+  let filename = uuidv4(); // 
+  let json = JSON.stringify(obj);
+  fs.writeFile(`data/${filename}.json`, json, 'utf8', () => { });
+
+});
