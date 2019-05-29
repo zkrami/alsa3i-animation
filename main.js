@@ -60,10 +60,10 @@ const uuidv4 = require('uuid/v4'); // I chose v4 ‒ you can select others
 
 // Attach listener in the main process with the given ID
 ipcMain.on('save-data', (event, obj) => {
-
+/*
   if (!fs.existsSync('data')) {
     fs.mkdirSync('data');
-  }
+  }*/
 
   let filename = uuidv4(); // 
   let json = JSON.stringify(obj);
