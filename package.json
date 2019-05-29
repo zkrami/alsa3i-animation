@@ -1,25 +1,60 @@
 {
-  "name": "electron-quick-start",
+  "name": "DarbAlsa3e",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "A minimal application for delivery",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "postinstall": "install-app-deps",
+    "start": "npm install && electron ./app",
+    "pack": "build --dir",
+    "dist": "build"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "",
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "Darb",
+    "Qatar",
+    "Alsa3e",
+    "delivery"
   ],
-  "author": "GitHub",
+  "author": "BrainSocket",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^5.0.0"
+    "electron": "^5.0.0",
+    "electron-builder": "^20.41.0"
   },
   "dependencies": {
     "uuid": "^3.3.2"
+  },
+  "build": {
+    "appId": "com.brainsocket.darbalsaee",
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    },
+    "win": {
+      "target": "squirrel",
+      "icon": "build/icon.ico"
+    }
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "latest",
+    "electron-builder": "latest"
   }
 }
