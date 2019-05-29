@@ -557,8 +557,8 @@ class Trip {
     toJSON() {
 
         return {
-            startPoint: this.startPoint,
-            endPoint: this.endPoint,
+            startCity: this.startCity,
+            endCity: this.endCity,
             time: this.time,
             deliveryGuy: this.deliveryGuy,
             date: this.date
@@ -666,9 +666,9 @@ $(function () {
             }
         }
 
-        
-        if(typeof handleData !== 'undefined')
-            handleData(toDownload); 
+
+        if (typeof handleData !== 'undefined')
+            handleData(toDownload);
 
 
         $(popup).remove();
