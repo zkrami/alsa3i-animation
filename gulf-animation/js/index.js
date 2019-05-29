@@ -1,4 +1,3 @@
-const { ipcRenderer } = require('electron');
 
 function makeReviewForm(obj) {
 
@@ -667,8 +666,10 @@ $(function () {
             }
         }
 
-        console.log(toDownload);
-        ipcRenderer.send('save-data', toDownload);
+        
+        if(typeof handleData !== 'undefined')
+            handleData(toDownload); 
+
 
         $(popup).remove();
 

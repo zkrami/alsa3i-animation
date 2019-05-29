@@ -1,0 +1,464 @@
+<html !DOCTYPE lang="en">
+
+<head>
+	<title>Gulf animation</title>
+	<meta charset="UTF-8">
+	<style>
+		@font-face {
+			font-family: "Arimo";
+			src: url("./fonts/Arimo/Arimo-Regular.ttf") format('truetype');
+			font-weight: 400;
+			font-style: normal;
+		}
+
+		@font-face {
+			font-family: "Arimo";
+			src: url("./fonts/Arimo/Arimo-Bold.ttf") format('truetype');
+			font-weight: 700;
+			font-style: bold;
+		}
+
+
+		@font-face {
+			font-family: "Cairo";
+			src: url("./fonts/Cairo/Cairo-Regular.ttf") format('truetype');
+			font-weight: 400;
+			font-style: normal;
+		}
+
+
+		@font-face {
+			font-family: "Cairo";
+			src: url("./fonts/Cairo/Cairo-Bold.ttf") format('truetype');
+			font-weight: 700;
+			font-style: bold;
+		}
+
+		.popup {
+			position: fixed;
+			background: rgba(0, 0, 0, .5);
+			width: 100%;
+			height: 100%;
+			z-index: -1;
+			top: 0;
+			left: 0;
+		}
+
+		.popup.active {
+			z-index: 10;
+
+
+		}
+
+		.popup-form-wrapper {
+			background: #fff;
+			width: 40%;
+			margin: 0 auto;
+			position: relative;
+			top: 15%;
+			border-radius: 10px;
+			padding: 50px;
+			box-shadow: -10px 10px 19px 1px #00000052;
+		}
+
+		.popup-form-wrapper {
+			transform: scale(0.5);
+			opacity: 0.6;
+			transition: all 0.6s;
+		}
+
+		.popup.active .popup-form-wrapper {
+			opacity: 1;
+			transform: scale(1);
+		}
+
+		.popup-form-wrapper input,
+		.popup-form-wrapper textarea,
+		.popup-form-wrapper button {
+			width: 100%;
+			padding: 10px;
+			margin-top: 5px;
+			margin-bottom: 10px;
+			border: solid 2px #ddd;
+			border-radius: 7px;
+			direction: rtl;
+		}
+
+		.popup-form-wrapper input[type=button] {
+			color: #fff;
+			border: none;
+			background: linear-gradient(90deg, rgba(9, 165, 251, 1) 0%, rgba(68, 137, 225, 1) 100%);
+
+		}
+
+		.popup-form-wrapper label {
+			color: #333;
+		}
+
+		html,
+		body {
+			padding: 0;
+			margin: 0;
+			font-family: 'Cairo', sans-serif;
+			background: #E5FFF3;
+			font-size: 15px;
+			background-image: url("images/flag.png");
+			background-size: cover;
+			background-repeat: no-repeat;
+		}
+
+
+
+		.card {
+
+			background: #fff;
+
+			border-radius: 10px;
+			padding: 20px;
+			box-shadow: -10px 10px 19px 1px #00000052;
+
+		}
+
+		.wrapper {
+			display: flex;
+			padding: 25px;
+		}
+
+		.trip-info {
+			display: inline-block;
+
+		}
+
+		.time-left {
+			display: inline-block;
+			margin-right: 20px;
+		}
+
+		.time-left h1 {
+			margin: 0;
+		}
+
+
+		.label {
+			color: #677175;
+			margin: 0;
+			line-height: 0.2;
+		}
+
+		.trip-info h3 {
+			margin: 5px 0px;
+		}
+
+		.trip-info span {
+			background: rgb(9, 165, 251);
+			padding: 1px 10px;
+			color: #fff;
+			display: inline-block;
+			border-radius: 20px;
+			font-size: 0.92rem;
+			background: linear-gradient(90deg, rgba(9, 165, 251, 1) 0%, rgba(68, 137, 225, 1) 100%);
+		}
+
+		.in-delivery-item {
+			padding-bottom: 15px;
+			border-bottom: solid 2px #ccc;
+			border-radius: 2px;
+			position: relative;
+			margin-top: 20px;
+		}
+
+		.close-btn {
+			width: 20px;
+			position: absolute;
+			left: 0;
+			top: -10px;
+			cursor: pointer;
+		}
+
+		.close-btn img {
+			width: 100%;
+		}
+
+		.deliveries {
+			flex-grow: 1;
+		}
+
+		.svg-container {
+			flex-grow: 4;
+			align-self: center;
+			text-align: center;
+		}
+
+		.in-delivery {
+			flex-grow: 0;
+		}
+
+		.deliveries h3 {
+			margin: 0;
+		}
+
+
+		.svg {
+
+			width: auto;
+			padding: 0;
+			margin: 0;
+			height: calc(94vh - 50px);
+		}
+
+		.banner {
+			width: 100%;
+			min-height: 6vh;
+			background: #700D16;
+			text-align: right;
+			color: #fff;
+			font-family: 'Cairo';
+
+		}
+
+		.banner span {
+			margin: 0 20px;
+			font-size: 16px;
+			line-height: 5vh;
+			font-weight: bold;
+		}
+
+		.card,
+		.deliveries {
+			text-align: right;
+		}
+
+		form {
+			text-align: right;
+		}
+
+		.input-wrapper-time {
+			width: 100%;
+		}
+
+		.input-wrapper-time table {
+			width: 100%;
+			text-align: right;
+			direction: rtl;
+		}
+
+		.input-wrapper-time table td {
+			width: 33.3%;
+		}
+
+		.color-input-wrapper input {
+			width: 30px;
+			padding: 1px;
+			height: 30px;
+			margin-right: 5px;
+		}
+
+		input[type=button] {
+			font-size: 1.1rem;
+		}
+
+		.in-delivery {
+			height: calc(94vh - 100px);
+			overflow-y: auto;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="popup" id="trip-form-popup">
+		<div class="popup-form-wrapper trip-form">
+
+			<form>
+				<div class="input-wrapper">
+					<label>الموصلاتي</label>
+					<input type="text" role="name" id="delivery-guy" dir="rtl" placeholder="مثال : أحمد المصري" />
+
+				</div>
+				<div class="input-wrapper ">
+
+					<div class="input-wrapper-time">
+						<table>
+							<tr>
+								<td>
+									ثواني
+								</td>
+								<td>
+									دقائق
+								</td>
+								<td>
+									ساعات
+								</td>
+							</tr>
+							<tr>
+								<td colspan="1">
+									<input max="59" min="0" value="5" type="number" role="seconds"
+										id="animation-time-second" />
+
+								</td>
+								<td colspan="1">
+									<input max="59" min="0" value="0" type="number" role="minute"
+										id="animation-time-minute" />
+
+								</td>
+								<td colspan="1">
+									<input min="0" value="0" type="number" role="hour" id="animation-time-hour" />
+
+								</td>
+							</tr>
+						</table>
+					</div>
+
+
+				</div>
+				<div class="input-wrapper color-input-wrapper">
+					<input type="color" value="#4e0708" role="color" id="color" />
+					<label>اللون</label>
+				</div>
+				<div class="input-wrapper">
+					<input type="button" value="موافق" id="trip-form-btn" />
+				</div>
+
+			</form>
+		</div>
+	</div>
+
+	<div class="banner">
+		<span>درب الساعي</span>
+	</div>
+
+	<div class="wrapper">
+		<div class="container card deliveries">
+
+			<h3 class="title">توصيلات اليوم</h3>
+			<div class="in-delivery-item">
+				<h5 class="label">الاسم</h5>
+				<h3>السيد احمد السودان</h3>
+			</div>
+			<div class="in-delivery-item">
+				<h5 class="label">الاسم</h5>
+				<h3>السيد حمد المسالم</h3>
+			</div>
+		</div>
+		<div class="container svg-container">
+			<svg class="svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+				xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 605.7 884.3"
+				style="enable-background:new 0 0 605.7 884.3;" xml:space="preserve">
+				<style type="text/css">
+					.st0 {
+						stroke: #FFFFFF;
+						stroke-miterlimit: 10;
+					}
+
+					.transparent {
+						fill: rgba(0, 0, 0, 0);
+					}
+
+
+					.holder-circle {
+						fill: rgba(78, 7, 8, 1);
+					}
+
+					.trip-line,
+					.trip-line-overlay {
+						fill: none;
+
+					}
+
+					.arrow {}
+
+					.trip-line,
+					.holder-line {
+						stroke-dasharray: 10, 15;
+					}
+
+
+					.holder-line {
+						stroke: rgba(73, 7, 8, 1);
+					}
+				</style>
+				<image style="overflow:visible;" width="2583" height="4184" xlink:href="images/phone.png"
+					transform="matrix(0.24 0 0 0.24 0 -47)">
+				</image>
+				<g id="context">
+					<path fill="rgba(0,0,0,0)" d="M340.5,88.7c63.7-28.7,73.1-5.6,114.9,14.1c-15.2-7.2,74.6,64.4,68.6,51.9c30.8,63.3-28.5,107.6-28.4,165.3
+					c0.1,38.1,36.2,87.4,40.3,132.9c7.3,80.6-18.6,150.5-67.8,216.4c-40.4,54.2-103,113.6-177,65.7c-56.9-36.8-48.8-133.6-60.1-196.3
+					c-15.4-85.4-31.1-164.5-2.6-250.7C243,243.6,293.2,110,340.5,88.7z" />
+
+					<circle class="holder-circle" id="holder-start" r="10" cx="10000" cy="10000" fill="#f00" />
+					<circle class="holder holder-circle" id="holder-end" r="10" cx="10000" cy="10000" fill="#f00" />
+					<line id="holder-line" class="holder holder-line" x1="10000" y1="10000" x2="10000" y2="10000"
+						style="stroke-width:5" stroke-linecap="round" />
+
+					<g>
+						<path class="region transparent" data-region="الشمال" d="M347.5,180.1c5.9-4-8.8-35.9-0.7-39.7c2.9-1.3,54.4-2.3,58.2-3.3c1.9-0.5-0.9,23.2,1.3,22.6
+								c2.1-0.3,22.8-4.3,27.4,1.6c3.9,4.7-2.3,19.3,1.9,20.5c14.1,3.9,27.7-9.6,22-16.8c-4-2.7-3.6-31.1,0-41.1l-15.4-47.7l-26-20.2H374
+								l-14.5,31.1l-41.1,6l-6.5,37.9l-23.3,43.7l1.2,6.1c1.5-0.4,2.9-0.7,4.3-1.1C311.3,175.8,339,186,347.5,180.1z" />
+						<path data-region="الخور" class="region transparent" d="M522.5,161.6l-10-18.2l-51-7.3l-3.9-12.1c-3.5,10.1-4,38.5,0,41.1c9.3,12-12.6,15.4-22,16.8
+								c-2.3,0.4,0.3-20.9-1.9-20.5c-7.1,1.2-21-2.4-27.4-1.6c-3.5,0.4,2.1-22.9-1.3-22.6c-14.8,1.2-42.5,4.3-58.2,3.3
+								c-3.5-0.3,4.3,39.9,0.7,39.7c-17.3,0-36.2-4.3-53.5-0.3c-1.5,0.4-2.9,0.7-4.3,1.1l5.5,27.6l52,2.3v27.7h62.6l-13.6,40.7l29.8,25.8
+								h34.3l-7.5-26.5l24.1-12.6l32.6,12.2l12.8-61l12.8-16L522.5,161.6z" />
+
+						<polygon class="region transparent" data-region="الظعاين" points="490.4,290.3 501.6,278.8 509.7,277.9 477.1,265.6 458.8,275.4 462.8,300.8 458.8,338.1 467.5,370.1 
+								474.5,383.2 492.3,372.9 484.2,341.1 498.4,342.4 486.7,321 	" />
+						<polygon class="region transparent" data-region="الدوحة" points="532.5,440.3 506.3,446.3 484.2,429.5 490.4,423 473.1,389.3 474.5,383.2 492.3,372.9 484.2,341.1 
+								498.4,342.4 517.1,349.5 529.7,378.8 519.9,405.7 542.4,420.2 	" />
+						<polygon class="region transparent" data-region="الوكره" points="542.9,464.2 532.8,440.5 506.4,446.4 508,457.3 461.7,476.9 461.7,513.9 384.5,490.7 384.5,541.8 
+								347.2,541.8 347,759.9 417.9,744.7 473.1,682.1 493.6,613.2 530.8,556.7 546.6,529.3 	" />
+						<polygon class="region transparent" data-region="الريان" points="321.4,755.3 347,760 347.2,541.8 384.5,541.8 384.5,491.3 461.7,513.9 461.7,476.6 508,457.3 
+								506.4,446.4 484.2,429.5 490.4,423 473.1,389.4 474.5,383.4 464.4,383.4 452.4,378.8 403.4,369.6 405.8,287.3 396.2,279.1 
+								409.8,238.4 347.2,238.4 347.2,210.4 295.2,208.4 278.1,199.5 262.3,238.8 243.7,265.6 224.5,283.5 210,328.9 214.1,428.7 
+								217.6,493.5 232.1,519.6 226.9,542.4 250.1,578.8 250.1,616.4 250.6,634.6 232.1,644.9 272.7,727.5 	" />
+						<polygon class="region transparent" data-region="ام صلال"
+							points="469.8,381 455.2,380 403.4,369.6 405.7,287.3 426,304.9 461.7,304.9 458.8,338.1 474.5,383.4 	" />
+					</g>
+				</g>
+
+
+				<g id="character" transform="translate(5000 5000)">
+					<image width="100" height="100" xlink:href="images/character.gif" />
+				</g>
+
+
+			</svg>
+		</div>
+
+
+
+		<div class="card in-delivery container">
+
+			<h3 class="title">في التوصيل</h3>
+			<div class="in-delivery-items">
+				<div class="in-delivery-item">
+
+					<div class="close-btn">
+						<img
+							src="data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3C!-- Generator: Adobe Illustrator 22.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0) --%3E%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 520.1 512' style='enable-background:new 0 0 520.1 512;' xml:space='preserve'%3E%3Cstyle type='text/css'%3E .st0%7Bfill:%23DB2709;%7D%0A%3C/style%3E%3Cpath class='st0' d='M260,5.6C121.7,5.6,9.6,117.7,9.6,256c0,138.3,112.1,250.4,250.4,250.4S510.5,394.3,510.5,256 C510.4,117.7,398.3,5.6,260,5.6z M392.4,366.3l-22.1,22.1L260,278.1L149.7,388.3l-22-22.1L238,256L127.7,145.7l22-22L260,233.9 l110.3-110.3l22.1,22L282.1,256L392.4,366.3z'/%3E%3C/svg%3E%0A" />
+					</div>
+
+					<div class="time-left">
+						<h5 class="label">الوقت المتبقي</h5>
+						<h1 class="timer">
+							03 : 23 : 00
+						</h1>
+					</div>
+					<div class="trip-info">
+						<h3>السيد احمد السودان</h3>
+						<span>الدوحة</span> <span>الوقرة</span>
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<script src="js/FileSaver.min.js"></script>
+	<script src="js/downloader.js"></script>
+	<script src="js/TweenMax.min.js"></script>
+	<script src="js/jquery-3.4.1.min.js"></script>
+	<script src="js/index.js"></script>
+	<script src="js/fullscreen.js"></script>
+
+</body>
+
+</html>
