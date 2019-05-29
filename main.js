@@ -68,9 +68,16 @@ ipcMain.on('save-data', (event, obj) => {
   }
 
   let filename = uuidv4(); // 
+
+
+  let output = ""; 
+  for(let prop in obj){
+      output += `${prop} : ${obj[prop]} \r\n`; 
+  }
+
   let json = JSON.stringify(obj);
 
-  fs.writeFile(`${directory}/${filename}.json`, json, 'utf8', (e) => { });
+  fs.writeFile(`${directory}/${filename}.txt`, output, 'utf8', (e) => { });
 
 
 
