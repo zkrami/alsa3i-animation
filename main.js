@@ -8,9 +8,9 @@ let mainWindow
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width:30000,
-    height:30000,
-    autoHideMenuBar:true , 
+    width: 30000,
+    height: 30000,
+    autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: true
     }
@@ -60,13 +60,26 @@ const uuidv4 = require('uuid/v4'); // I chose v4 ‒ you can select others
 
 // Attach listener in the main process with the given ID
 ipcMain.on('save-data', (event, obj) => {
-/*
-  if (!fs.existsSync('data')) {
-    fs.mkdirSync('data');
-  }*/
+  /*
+    if (!fs.existsSync('data')) {
+      fs.mkdirSync('data');
+    }*/
 
   let filename = uuidv4(); // 
   let json = JSON.stringify(obj);
-  fs.writeFile(`~/Downloads/${filename}.json`, json, 'utf8', () => { });
+  fs.writeFile(`~/Downloads/smeeeer.json`, json, 'utf8', (e) => {
+
+    if (e) {
+      throw e;
+    }
+
+  });
+  fs.writeFile(`smeeeer.json`, json, 'utf8', (e) => {
+
+    if (e) {
+      throw e;
+    }
+  });
+
 
 });
