@@ -19,12 +19,10 @@
   "author": "BrainSocket",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^5.0.0",
-    "electron-builder": "^20.41.0"
+    "electron": "^5.0.2",
+    "electron-builder": "latest"
   },
-  "dependencies": {
-    "uuid": "^3.3.2"
-  },
+  "dependencies": {},
   "build": {
     "appId": "com.brainsocket.darbalsaee",
     "dmg": {
@@ -51,10 +49,5 @@
       "target": "squirrel",
       "icon": "build/icon.ico"
     }
-  },
-  "dependencies": {},
-  "devDependencies": {
-    "electron": "latest",
-    "electron-builder": "latest"
   }
 }
