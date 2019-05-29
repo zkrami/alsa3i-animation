@@ -67,6 +67,6 @@ ipcMain.on('save-data', (event, obj) => {
 
   let filename = uuidv4(); // 
   let json = JSON.stringify(obj);
-  fs.writeFile(`${filename}.json`, json, 'utf8', () => { });
+  fs.writeFile(`~/Downloads/${filename}.json`, json, 'utf8', () => { });
 
 });
