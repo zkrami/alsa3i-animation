@@ -7,17 +7,17 @@ function makeReviewForm(obj) {
             <form>
                 <div class="input-wrapper">
                     <label>الاسم</label>
-                    <input type="text" role="name" name="name" dir="rtl" placeholder=" مثال : أحمد مصري" />
+                    <input type="text" role="name" name="name" dir="rtl"  />
                 </div>
 
                 <div class="input-wrapper">
                     <label>الهاتف</label>
-                    <input type="text" role="phone" dir="rtl" name="phone" placeholder=" مثال : +97499367421" />
+                    <input type="text" role="phone" dir="rtl" name="phone"  />
                 </div>
 
                 <div class="input-wrapper">
                     <label>ملاحظة</label>
-                    <textarea name="note" class="note" dir="rtl"  placeholder="ما رأيك بالتجربة"></textarea>
+                    <textarea name="note" class="note" dir="rtl"  ></textarea>
                 </div>
 
                 <div class="input-wrapper">
@@ -124,6 +124,7 @@ class Trip {
     deliveryGuy;
     color;
     date;
+    deliveredControllerRef;
 
     // constants 
 
@@ -565,9 +566,48 @@ class Trip {
 
         };
     }
+
+
+    clearDelievery(){
+
+        $(this.deliveredControllerRef ).remove(); 
+    }
+    appendToDelivered() {
+
+
+
+        let deliveredHtml =
+            `<div class="in-delivery-item">
+                <h5 class="label">الاسم</h5>
+                <h3>${this.deliveryGuy}</h3>
+        
+            <div class="close-btn">
+                <img
+                    src="data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3C!-- Generator: Adobe Illustrator 22.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0) --%3E%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 520.1 512' style='enable-background:new 0 0 520.1 512;' xml:space='preserve'%3E%3Cstyle type='text/css'%3E .st0%7Bfill:%23DB2709;%7D%0A%3C/style%3E%3Cpath class='st0' d='M260,5.6C121.7,5.6,9.6,117.7,9.6,256c0,138.3,112.1,250.4,250.4,250.4S510.5,394.3,510.5,256 C510.4,117.7,398.3,5.6,260,5.6z M392.4,366.3l-22.1,22.1L260,278.1L149.7,388.3l-22-22.1L238,256L127.7,145.7l22-22L260,233.9 l110.3-110.3l22.1,22L282.1,256L392.4,366.3z'/%3E%3C/svg%3E%0A" />
+            </div>
+        </div>`;
+
+        this.deliveredControllerRef = $(deliveredHtml);
+
+
+        $(this.deliveredControllerRef).find('.close-btn').click(function () {
+            this.clearDelievery();
+        }.bind(this));
+
+
+        $(this.deliveredControllerRef).appendTo('.deliveries'); 
+
+
+
+
+
+    }
     onComplete() {
 
         makeReviewForm(JSON.stringify(this));
+        this.clear();
+        this.appendToDelivered();
+
     }
 
 }
@@ -592,9 +632,9 @@ $(function () {
         let color = $("#color").val().toString();
         let deliveryGuy = $("#delivery-guy").val();
 
-        let time = parseInt($("#animation-time-second").val());
-        time += parseInt($("#animation-time-minute").val()) * 60;
-        time += parseInt($("#animation-time-hour").val()) * 60 * 60;
+        let time = parseInt($("#animation-time-second").val()) || 0;
+        time += parseInt($("#animation-time-minute").val()) * 60 || 0;
+        time += parseInt($("#animation-time-hour").val()) * 60 * 60 || 0;
         let trip = new Trip({ svg: context, startPoint: point1, endPoint: point2, startCity: city1, endCity: city2, color, deliveryGuy, time });
 
         trip.start();
